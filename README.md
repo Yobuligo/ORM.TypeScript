@@ -1,5 +1,5 @@
 # ORM.TypeScript
-A simple ORM written in and for TypeScript to manage data by REST calls especially for firebase as store. The usage is to create test data in a simple way.
+A simple ORM prototype written in and for TypeScript to manage data by REST calls especially for firebase as store. The usage was and is to create test data in a simple way.
 
 ## Usage
 Prerequisite is access to a firebase database.
@@ -69,3 +69,7 @@ Animal.isEmpty()
 Animal.isNotEmpty()
 Animal.last()
 ```
+
+## Handling data object ids
+To not care about setting data object ids, the underlying id provider is responsible for providing a unique id to each data object.
+Therefore a separate data object is persisted in firebase which provides the ids.
