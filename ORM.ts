@@ -226,7 +226,6 @@ export abstract class DataObject implements IDataObject {
 
 class DataAccessObject<T extends IDataObject> implements IDataAccessObject<T> {
   private dataObjects: T[] = [];
-  private persisted: T[] = [];
 
   constructor(public type: new () => T, private orm: IORM) {}
 
@@ -342,7 +341,3 @@ class DataAccessObject<T extends IDataObject> implements IDataAccessObject<T> {
     return { ...data } as T;
   }
 }
-
-const orm = new ORM(
-  "https://fir-b80e3-default-rtdb.europe-west1.firebasedatabase.app"
-);
