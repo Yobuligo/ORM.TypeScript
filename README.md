@@ -6,7 +6,9 @@ Prerequisite is access to a firebase database.
 
 ### Connect your ORM with a firebase database
 Call function connectORM. This connection is used for all REST calls within your session.
-`connectORM("<firebase_url>");`
+```
+connectORM("<firebase_url>");
+```
 
 ### Create a data object
 A data class or data object provides the data which should be persisted. This data class must be inherited from DataObject. The class DataObject provides (static) methods to handle CRUD operations.
@@ -38,13 +40,17 @@ Animal.save(animal);
 ### Find all data objects
 Call method findAll at the data object class to fetch all current instances of a data object type.
 ```
-const animals = Animal.findAll();
+Animal.findAll().then((animals) => {
+  // access loaded animals
+});
 ```
 
 ### Find a data object by id
 An alternative to findAll is findById to retrieve a data object with a specific id. If the data object doesn't exist undefined is returned instead.
 ```
-const animal = Animal.findById(123);
+Animal.findById(123).then((animal) => {
+  // access loaded animal with id 123
+});
 ```
 
 ### Delete a data object
