@@ -2,7 +2,7 @@
 A simple ORM prototype written in and for TypeScript to manage data by REST calls especially for firebase as store. The usage was and is to create test data in a simple way.
 
 ## Usage
-Prerequisite is access to a firebase database.
+Prerequisite is access to a firebase database. To keep it simple the ORM.ts has just to be copied to your project.
 
 ### Connect your ORM with a firebase database
 Call function connectORM. This connection is used for all REST calls within your session.
