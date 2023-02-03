@@ -1,38 +1,38 @@
 /**
  * A simple ORM to access data especially from firebase.
- * 
- * How to create an instance?
- *    const orm = new ORM("<firebase_database_url>")
- * 
+ *
+ * How to create a connection?
+ *    Call function connectORM("<firebase_database_url>")
+ *
  * To use the ORM the data class has to extend DataObject.
  *    class Animal extends DataObject {
  *        name: string = "Elephant";
  *        age: number = 12;
  *    }
- * 
+ *
  * CRUD operations can be made via a DataObject class.
  *    Persist or update an instance
  *        const animal = new Animal();
  *        Animal.save(animal);
- * 
+ *
  *    Load instances
  *        const animals = Animal.findAll();
- * 
+ *
  *    Delete instances
  *        Animal.delete(animal);
- * 
+ *
  * Each DataObject class has additional help methods
- * 
+ *
  * Endpoints
  *    The endpoints are derived from the DataObject-Class. E.g. for the DataObject class Animal the endpoint would be /animal
- * 
+ *
  * To give an alternative endpoint the static property "path" can be provided by the new path
  *    class Animal extends DataObject {
  *        static path: string = "/myAnimals";
  *        name: string = "Elephant";
  *        age: number = 12;
  *    }
- */ 
+ */
 
 type Constructor<T> = new () => T;
 
@@ -158,14 +158,14 @@ class DataAccessObjectRepositoryDefault implements IDataAccessObjectRepository {
   }
 }
 
-export interface IORM {
+let DataAccessObjectRepository: IDataAccessObjectRepository;
+
+interface IORM {
   readonly URL: string;
   getIdProvider(): IUUIdProvider;
 }
 
-let DataAccessObjectRepository: IDataAccessObjectRepository;
-
-export class ORM implements IORM {
+class ORM implements IORM {
   constructor(public URL: string) {
     DataAccessObjectRepository = new DataAccessObjectRepositoryDefault(this);
   }
@@ -174,6 +174,10 @@ export class ORM implements IORM {
     return new UUIdProviderDefault(this);
   }
 }
+
+export const connectORM = (URL: string) => {
+  new ORM(URL);
+};
 
 export abstract class DataObject implements IDataObject {
   id: number = 0;
